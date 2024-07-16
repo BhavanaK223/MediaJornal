@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Reads</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  
+    <style>
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Media Reads</h1>
+
+        <div class="username">
+          <label for="exampleFormControlInput1" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="exampleFormControlInput1"         
+            placeholder="name@example.com">
+        </div>
+        <button type="submit">Login</button>
+
+    <form id="bookForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" required>
+
+        <label for="genre">Genre:</label>
+        <input type="text" id="genre" name="genre" required>
+
+        <label for="year">Year Read:</label>
+        <input type="number" id="year" name="year" required>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+
+        <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Book List</h2>
+    <ul id="bookList">
+        <!-- Book entries will be added here -->
+    </ul>
+
+    <script>
+        const bookForm = document.getElementById('bookForm');
+        const bookList = document.getElementById('bookList');
+
+        bookForm.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get book data from form
+            const title = document.getElementById('title').value;
+            const author = document.getElementById('author').value;
+            const genre = document.getElementById('genre').value;
+            const year = document.getElementById('year').value;
+            const description = document.getElementById('description').value;
+
+            // Create a new book object
+            const newBook = {
+                title,
+                author,
+                genre,
+                year,
+                description
+            };
+
+            // Add book to the list
+            addBookToList(newBook);
+
+            // Clear the form
+            bookForm.reset();
+        });
+
+        function addBookToList(book) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <h3>${book.title}</h3>
+                <p>By: ${book.author}</p>
+                <p>Genre: ${book.genre}</p>
+                <p>Year: ${book.year}</p>
+                <p>${book.description}</p>
+            `;
+            bookList.appendChild(listItem);
+        }
+    </script>
+
+</body>
+</html>
